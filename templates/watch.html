@@ -1,12 +1,24 @@
-<h2>{{video[2]}}</h2>
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{{ video.title }} — MyTube</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
 
-<p>By {{video[6]}}</p>
+<h2>{{ video.title }}</h2>
 
-<video width="600" controls poster="/thumbs/{{video[4]}}">
-<source src="/videos/{{video[1]}}">
+<p>Uploaded by {{ video.username }}</p>
+
+<video width="600" controls poster="/thumbs/{{video.thumbnail}}">
+  <source src="/videos/{{video.filename}}">
 </video>
 
-<p>{{video[3]}}</p>
+<p>{{ video.description }}</p>
 
 <br>
 <a href="/">Back</a>
+
+</body>
+</html>
