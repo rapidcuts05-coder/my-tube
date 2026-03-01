@@ -1,24 +1,161 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>{{ video.title }} — MyTube</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<meta charset="UTF-8">
+<title>{{video[2]}} - MyTube</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#0f0f0f;
+    color:white;
+}
+
+.navbar{
+    background:#202020;
+    padding:10px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    color:red;
+    font-size:22px;
+    font-weight:bold;
+}
+
+.container{
+    display:flex;
+    padding:20px;
+    gap:20px;
+}
+
+/* LEFT SIDE (VIDEO) */
+
+.video-section{
+    flex:3;
+}
+
+video{
+    width:100%;
+    border-radius:8px;
+}
+
+.video-title{
+    font-size:22px;
+    margin-top:15px;
+}
+
+.video-info{
+    color:gray;
+    margin-top:5px;
+}
+
+.action-buttons{
+    margin-top:15px;
+}
+
+button{
+    background:#222;
+    color:white;
+    border:none;
+    padding:8px 12px;
+    margin-right:10px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#333;
+}
+
+/* RIGHT SIDE (RECOMMENDED) */
+
+.sidebar{
+    flex:1;
+}
+
+.recommended{
+    background:#181818;
+    padding:10px;
+    border-radius:8px;
+    margin-bottom:10px;
+}
+
+.recommended img{
+    width:100%;
+    border-radius:5px;
+}
+
+.recommended-title{
+    font-size:14px;
+    margin-top:5px;
+}
+
+a{
+    text-decoration:none;
+    color:white;
+}
+</style>
 </head>
+
 <body>
 
-<h2>{{ video.title }}</h2>
+<div class="navbar">
+    <div class="logo">MyTube</div>
+    <div>
+        <a href="/">Home</a>
+    </div>
+</div>
 
-<p>Uploaded by {{ video.username }}</p>
+<div class="container">
 
-<video width="600" controls poster="/thumbs/{{video.thumbnail}}">
-  <source src="/videos/{{video.filename}}">
+<div class="video-section">
+
+<video controls>
+    <source src="/videos/{{video[3]}}">
 </video>
 
-<p>{{ video.description }}</p>
+<div class="video-title">
+{{video[2]}}
+</div>
 
-<br>
-<a href="/">Back</a>
+<div class="video-info">
+Uploaded on {{video[6]}}
+</div>
+
+<div class="action-buttons">
+<button>👍 Like</button>
+<button>👎 Dislike</button>
+<button>🔗 Share</button>
+</div>
+
+</div>
+
+
+<div class="sidebar">
+
+{% for v in videos %}
+
+<a href="/watch/{{v[0]}}">
+<div class="recommended">
+
+<img src="/thumbs/{{v[4]}}">
+
+<div class="recommended-title">
+{{v[2]}}
+</div>
+
+</div>
+</a>
+
+{% endfor %}
+
+</div>
+
+</div>
 
 </body>
 </html>
